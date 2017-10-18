@@ -11,7 +11,6 @@ import ARKit
 
 class ViewController: UIViewController {
     
-
     @IBOutlet weak var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
     override func viewDidLoad() {
@@ -27,13 +26,14 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     @IBAction func play(_ sender: Any) {
-        self.sendCookie()
+        self.sendCookie() // repeat function until game is over[
+        // count how much time has passed and start sendPumpkin after a certain amount of time has passed
+        //self.sendPumpkin() // repeat function until game is over
+        
     }
    
-    
     @objc func handleTap(sender: UITapGestureRecognizer) {
         let sceneViewTappedOn = sender.view as! SCNView
         let touchCoordinates = sender.location(in: sceneViewTappedOn)
@@ -41,21 +41,27 @@ class ViewController: UIViewController {
         if hitTest.isEmpty {
             print("didn't touch anything")
         } else {
-            let results = hitTest.first!
-            let node = results.node
+            //let results = hitTest.first!
+            //let node = results.node
         }
     }
     
+    // restructure to send any 3d object, and animate it (pumpkin or cookie)
     func sendCookie() {
+        // load cookie object
         let cookieScene = SCNScene(named: "art.scnassets/cookie.scn")
         let cookieNode = cookieScene?.rootNode.childNode(withName: "Sphere_000", recursively: false)
-        cookieNode?.position = SCNVector3(0,0,-10)
+        // start cookie at random position
+        cookieNode?.position = SCNVector3(0,0,-10) // change to random start position
  //       cookieNode?.scale = SCNVector3(0.5, 0.5, 0.2)
         self.sceneView.scene.rootNode.addChildNode(cookieNode!)
+        // animate cookie
         let slide = CABasicAnimation(keyPath: "position")
         slide.fromValue = cookieNode?.position
-        slide.toValue = SCNVector3((cookieNode?.position.x)! + 10,0,(cookieNode?.position.z)!)
+        slide.toValue = SCNVector3((cookieNode?.position.x)! + 10,(cookieNode?.position.y)!,
+                                   (cookieNode?.position.z)!) // change to random direction
         slide.duration = 1
         cookieNode?.addAnimation(slide, forKey: "position")
+        // remove object after animation
     }
 }
