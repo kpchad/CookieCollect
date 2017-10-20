@@ -8,6 +8,7 @@
 
 import UIKit
 import ARKit
+import Each
 
 class ViewController: UIViewController {
     
@@ -28,6 +29,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func play(_ sender: Any) {
+        //self.setTimer()
         self.sendCookie() // repeat function until game is over[
         // count how much time has passed and start sendPumpkin after a certain amount of time has passed
         //self.sendPumpkin() // repeat function until game is over
@@ -50,9 +52,9 @@ class ViewController: UIViewController {
     func sendCookie() {
         // load cookie object
         let cookieScene = SCNScene(named: "art.scnassets/cookie.scn")
-        let cookieNode = cookieScene?.rootNode.childNode(withName: "Sphere_000", recursively: false)
+        let cookieNode = cookieScene?.rootNode.childNode(withName: "cookie", recursively: false)
         // start cookie at random position
-        cookieNode?.position = SCNVector3(0,0,-10) // change to random start position
+        cookieNode?.position = SCNVector3(0,0,-3) // change to random start position
  //       cookieNode?.scale = SCNVector3(0.5, 0.5, 0.2)
         self.sceneView.scene.rootNode.addChildNode(cookieNode!)
         // animate cookie
@@ -61,7 +63,11 @@ class ViewController: UIViewController {
         slide.toValue = SCNVector3((cookieNode?.position.x)! + 10,(cookieNode?.position.y)!,
                                    (cookieNode?.position.z)!) // change to random direction
         slide.duration = 1
+        //SCNTransaction.begin()
         cookieNode?.addAnimation(slide, forKey: "position")
+        //SCNTransaction.completionBlock = {
+        //  cookieNode?.removeFromParentNode()
+        //}
         // remove object after animation
     }
 }

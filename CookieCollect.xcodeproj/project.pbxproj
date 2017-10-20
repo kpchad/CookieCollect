@@ -13,6 +13,9 @@
 		0B62976F1F95B6BC009A17E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B62976E1F95B6BC009A17E8 /* Assets.xcassets */; };
 		0B6297721F95B6BC009A17E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B6297701F95B6BC009A17E8 /* LaunchScreen.storyboard */; };
 		0B62977D1F95B84E009A17E8 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B62977C1F95B84E009A17E8 /* art.scnassets */; };
+		0BAB6DA91F99A6D7006902BC /* cookie.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB6DA71F99A6D7006902BC /* cookie.mtl */; };
+		0BAB6DAA1F99A6D7006902BC /* cookie.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB6DA81F99A6D7006902BC /* cookie.png */; };
+		9F16CE3D63E530859FCFE225 /* Pods_CookieCollect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218735B4F8CDA62141DF4AB2 /* Pods_CookieCollect.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,12 @@
 		0B62977A1F95B817009A17E8 /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
 		0B62977C1F95B84E009A17E8 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		0B677D461F95BABB0041CDA0 /* cookie.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = cookie.scn; sourceTree = "<group>"; };
+		0BAB6DA71F99A6D7006902BC /* cookie.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cookie.mtl; path = art.scnassets/cookie.mtl; sourceTree = "<group>"; };
+		0BAB6DA81F99A6D7006902BC /* cookie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cookie.png; path = art.scnassets/cookie.png; sourceTree = "<group>"; };
+		0BAB6DAB1F99A708006902BC /* cookie.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = cookie.scn; path = art.scnassets/cookie.scn; sourceTree = "<group>"; };
+		218735B4F8CDA62141DF4AB2 /* Pods_CookieCollect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CookieCollect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50E95C82130E28D294FA19D5 /* Pods-CookieCollect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookieCollect.release.xcconfig"; path = "Pods/Target Support Files/Pods-CookieCollect/Pods-CookieCollect.release.xcconfig"; sourceTree = "<group>"; };
+		A430AB3888D47128DEE8B04C /* Pods-CookieCollect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookieCollect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookieCollect/Pods-CookieCollect.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F16CE3D63E530859FCFE225 /* Pods_CookieCollect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +54,8 @@
 			children = (
 				0B6297661F95B6BC009A17E8 /* CookieCollect */,
 				0B6297651F95B6BC009A17E8 /* Products */,
+				705BB1CCF5613C0FC2783865 /* Pods */,
+				8BE3648C64C76148A4D3C219 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +70,9 @@
 		0B6297661F95B6BC009A17E8 /* CookieCollect */ = {
 			isa = PBXGroup;
 			children = (
+				0BAB6DAB1F99A708006902BC /* cookie.scn */,
+				0BAB6DA71F99A6D7006902BC /* cookie.mtl */,
+				0BAB6DA81F99A6D7006902BC /* cookie.png */,
 				0B677D461F95BABB0041CDA0 /* cookie.scn */,
 				0B62977A1F95B817009A17E8 /* textures */,
 				0B6297671F95B6BC009A17E8 /* AppDelegate.swift */,
@@ -71,6 +86,23 @@
 			path = CookieCollect;
 			sourceTree = "<group>";
 		};
+		705BB1CCF5613C0FC2783865 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A430AB3888D47128DEE8B04C /* Pods-CookieCollect.debug.xcconfig */,
+				50E95C82130E28D294FA19D5 /* Pods-CookieCollect.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8BE3648C64C76148A4D3C219 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				218735B4F8CDA62141DF4AB2 /* Pods_CookieCollect.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -78,9 +110,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B6297761F95B6BC009A17E8 /* Build configuration list for PBXNativeTarget "CookieCollect" */;
 			buildPhases = (
+				595A85FF1D09120E4C981C84 /* [CP] Check Pods Manifest.lock */,
 				0B6297601F95B6BC009A17E8 /* Sources */,
 				0B6297611F95B6BC009A17E8 /* Frameworks */,
 				0B6297621F95B6BC009A17E8 /* Resources */,
+				F72FCDD9F364B0E7905B2E35 /* [CP] Embed Pods Frameworks */,
+				FC73EBB6C8BF0E29EDE941D7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,11 +168,67 @@
 				0B6297721F95B6BC009A17E8 /* LaunchScreen.storyboard in Resources */,
 				0B62977D1F95B84E009A17E8 /* art.scnassets in Resources */,
 				0B62976F1F95B6BC009A17E8 /* Assets.xcassets in Resources */,
+				0BAB6DAA1F99A6D7006902BC /* cookie.png in Resources */,
 				0B62976D1F95B6BC009A17E8 /* Main.storyboard in Resources */,
+				0BAB6DA91F99A6D7006902BC /* cookie.mtl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		595A85FF1D09120E4C981C84 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CookieCollect-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F72FCDD9F364B0E7905B2E35 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CookieCollect/Pods-CookieCollect-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Each/Each.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Each.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CookieCollect/Pods-CookieCollect-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC73EBB6C8BF0E29EDE941D7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CookieCollect/Pods-CookieCollect-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0B6297601F95B6BC009A17E8 /* Sources */ = {
@@ -280,6 +371,7 @@
 		};
 		0B6297771F95B6BC009A17E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A430AB3888D47128DEE8B04C /* Pods-CookieCollect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -295,6 +387,7 @@
 		};
 		0B6297781F95B6BC009A17E8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50E95C82130E28D294FA19D5 /* Pods-CookieCollect.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
