@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,30 +22,46 @@
                             </arscnView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpM-9e-tBv">
                                 <rect key="frame" x="16" y="607" width="80" height="40"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="0.69990647009999996" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="G03-HW-LaT"/>
                                     <constraint firstAttribute="height" constant="40" id="HVS-LC-lZZ"/>
                                 </constraints>
-                                <state key="normal" title="Start"/>
+                                <state key="normal" title="Start">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="play:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Cu-7R-rzr"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9R-m6-vPe">
+                                <rect key="frame" x="255" y="40" width="100" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="0.6999064700704225" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="rDM-bZ-zrl"/>
+                                    <constraint firstAttribute="height" constant="30" id="uCi-pg-ZN4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="qpM-9e-tBv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="JRG-1l-B4v"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="q9R-m6-vPe" secondAttribute="trailing" constant="20" id="Ofp-dA-EAb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qpM-9e-tBv" secondAttribute="bottom" constant="20" id="afC-Rh-c6Y"/>
                             <constraint firstItem="rbA-bn-kgb" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="dXu-H6-t6n"/>
                             <constraint firstItem="rbA-bn-kgb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="eEh-x6-fK9"/>
                             <constraint firstItem="rbA-bn-kgb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hWV-El-gHb"/>
+                            <constraint firstItem="q9R-m6-vPe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="qhf-Fy-yl3"/>
                             <constraint firstItem="rbA-bn-kgb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yEq-nu-1tr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="sceneView" destination="rbA-bn-kgb" id="Kkl-up-VTE"/>
+                        <outlet property="timerLabel" destination="q9R-m6-vPe" id="Zvf-oU-dXZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

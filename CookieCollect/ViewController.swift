@@ -12,12 +12,15 @@ import Each
 
 class ViewController: UIViewController {
     
+    var timer = Each(1).seconds
+    var countdown = 10
+    
     @IBOutlet weak var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sceneView.session.run(configuration)
-        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints,ARSCNDebugOptions.showWorldOrigin]
+        //self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints,ARSCNDebugOptions.showWorldOrigin]
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,13 +32,20 @@ class ViewController: UIViewController {
     }
 
     @IBAction func play(_ sender: Any) {
-        //self.setTimer()
-        self.sendCookie() // repeat function until game is over[
-        // count how much time has passed and start sendPumpkin after a certain amount of time has passed
-        //self.sendPumpkin() // repeat function until game is over
-        
+        self.setTimer()
+        // load cookie
+        let cookieScene = SCNScene(named: "art.scnassets/cookie.scn")
+        let cookieNode = cookieScene?.rootNode.childNode(withName: "cookie", recursively: false)
+        self.sendCandy(node: cookieNode!)
+        // adding more cookies VV not working
+        self.sendCandy(node: cookieNode!)
+        self.sendCandy(node: cookieNode!)
+        self.sendCandy(node: cookieNode!)
+        self.sendCandy(node: cookieNode!)
     }
    
+    @IBOutlet weak var timerLabel: UILabel!
+    
     @objc func handleTap(sender: UITapGestureRecognizer) {
         let sceneViewTappedOn = sender.view as! SCNView
         let touchCoordinates = sender.location(in: sceneViewTappedOn)
@@ -43,31 +53,47 @@ class ViewController: UIViewController {
         if hitTest.isEmpty {
             print("didn't touch anything")
         } else {
-            //let results = hitTest.first!
-            //let node = results.node
+            let results = hitTest.first!
+            let node = results.node
+            node.removeFromParentNode()
+            self.sendCandy(node: node)
+            self.restoreTimer()
         }
     }
     
-    // restructure to send any 3d object, and animate it (pumpkin or cookie)
-    func sendCookie() {
-        // load cookie object
-        let cookieScene = SCNScene(named: "art.scnassets/cookie.scn")
-        let cookieNode = cookieScene?.rootNode.childNode(withName: "cookie", recursively: false)
-        // start cookie at random position
-        cookieNode?.position = SCNVector3(0,0,-3) // change to random start position
- //       cookieNode?.scale = SCNVector3(0.5, 0.5, 0.2)
-        self.sceneView.scene.rootNode.addChildNode(cookieNode!)
-        // animate cookie
-        let slide = CABasicAnimation(keyPath: "position")
-        slide.fromValue = cookieNode?.position
-        slide.toValue = SCNVector3((cookieNode?.position.x)! + 10,(cookieNode?.position.y)!,
-                                   (cookieNode?.position.z)!) // change to random direction
-        slide.duration = 1
-        //SCNTransaction.begin()
-        cookieNode?.addAnimation(slide, forKey: "position")
-        //SCNTransaction.completionBlock = {
-        //  cookieNode?.removeFromParentNode()
-        //}
-        // remove object after animation
+    func sendCandy(node: SCNNode) {
+        // start candy at random position
+        node.position = SCNVector3(randomNumbers(firstNum: -10, secondNum: 10),randomNumbers(firstNum: 0, secondNum: -10),randomNumbers(firstNum: -10, secondNum: 10))
+        self.sceneView.scene.rootNode.addChildNode(node)
+        // animate node
+        let pulse = CABasicAnimation(keyPath: "scale")
+        pulse.fromValue = node.scale
+        pulse.toValue = SCNVector3((node.scale.x * 0.8), (node.scale.y * 0.8), (node.scale.z * 0.8))
+        pulse.repeatCount = 2
+        pulse.duration = 0.1
+        pulse.autoreverses = true
+        node.addAnimation(pulse, forKey: "scale")
+    }
+
+    func setTimer() {
+        self.timer.perform { () -> NextStep in
+            self.countdown -= 1
+            self.timerLabel.text = String(self.countdown)
+            if self.countdown == 0 {
+                self.timerLabel.text = "you lose"
+                return .stop
+            }
+            return .continue
+        }
+    }
+    
+    func restoreTimer() {
+        self.countdown = 10
+        self.timerLabel.text = String(self.countdown)
+    }
+    
+    func randomNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
     }
 }
+
