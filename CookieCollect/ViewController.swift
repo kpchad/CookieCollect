@@ -34,14 +34,14 @@ class ViewController: UIViewController {
     @IBAction func play(_ sender: Any) {
         self.setTimer()
         // load cookie
-        let cookieScene = SCNScene(named: "art.scnassets/cookie.scn")
-        let cookieNode = cookieScene?.rootNode.childNode(withName: "cookie", recursively: false)
-        self.sendCandy(node: cookieNode!)
+        let candyScene = SCNScene(named: "art.scnassets/candy_blue.scn")
+        let candyNode = candyScene?.rootNode.childNode(withName: "candy", recursively: false)
+        self.sendCandy(node: candyNode!)
         // adding more cookies VV not working
-        self.sendCandy(node: cookieNode!)
-        self.sendCandy(node: cookieNode!)
-        self.sendCandy(node: cookieNode!)
-        self.sendCandy(node: cookieNode!)
+//        self.sendCandy(node: cookieNode!)
+//        self.sendCandy(node: cookieNode!)
+//        self.sendCandy(node: cookieNode!)
+//        self.sendCandy(node: cookieNode!)
     }
    
     @IBOutlet weak var timerLabel: UILabel!
@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         let pulse = CABasicAnimation(keyPath: "scale")
         pulse.fromValue = node.scale
         pulse.toValue = SCNVector3((node.scale.x * 0.8), (node.scale.y * 0.8), (node.scale.z * 0.8))
-        pulse.repeatCount = 2
+        pulse.repeatCount = 10
         pulse.duration = 0.1
         pulse.autoreverses = true
         node.addAnimation(pulse, forKey: "scale")
