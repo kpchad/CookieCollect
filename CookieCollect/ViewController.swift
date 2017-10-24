@@ -16,11 +16,14 @@ class ViewController: UIViewController {
     var countdown = 10
     
     @IBOutlet weak var sceneView: ARSCNView!
+    
+    
     let configuration = ARWorldTrackingConfiguration()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.run(configuration)
-        //self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints,ARSCNDebugOptions.showWorldOrigin]
+        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints,ARSCNDebugOptions.showWorldOrigin]
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
         // Do any additional setup after loading the view, typically from a nib.
@@ -32,16 +35,22 @@ class ViewController: UIViewController {
     }
 
     @IBAction func play(_ sender: Any) {
+        // remove any existing nodes and restart timer (acting as a reset button)
+        sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            node.removeFromParentNode()
+        }
+        self.restoreTimer()
         self.setTimer()
-        // load cookie
-        let candyScene = SCNScene(named: "art.scnassets/candy_blue.scn")
-        let candyNode = candyScene?.rootNode.childNode(withName: "candy", recursively: false)
-        self.sendCandy(node: candyNode!)
-        // adding more cookies VV not working
-//        self.sendCandy(node: cookieNode!)
-//        self.sendCandy(node: cookieNode!)
-//        self.sendCandy(node: cookieNode!)
-//        self.sendCandy(node: cookieNode!)
+        // add candies to scene
+        let blueCandyScene = SCNScene(named: "art.scnassets/candy_blue.scn")
+        let blueCandyNode = blueCandyScene?.rootNode.childNode(withName: "candy", recursively: false)
+        self.sendCandy(node: blueCandyNode!)
+        let orangeCandyScene = SCNScene(named: "art.scnassets/candy_orange.scn")
+        let orangeCandyNode = orangeCandyScene?.rootNode.childNode(withName: "candy", recursively: false)
+        self.sendCandy(node: orangeCandyNode!)
+        let dotsCandyScene = SCNScene(named: "art.scnassets/candy_dots.scn")
+        let dotsCandyNode = dotsCandyScene?.rootNode.childNode(withName: "candy", recursively: false)
+        self.sendCandy(node: dotsCandyNode!)
     }
    
     @IBOutlet weak var timerLabel: UILabel!
@@ -63,16 +72,17 @@ class ViewController: UIViewController {
     
     func sendCandy(node: SCNNode) {
         // start candy at random position
-        node.position = SCNVector3(randomNumbers(firstNum: -10, secondNum: 10),randomNumbers(firstNum: 0, secondNum: -10),randomNumbers(firstNum: -10, secondNum: 10))
+        node.position = SCNVector3(randomNumbers(firstNum: -2, secondNum: 2),randomNumbers(firstNum: -1, secondNum: -2),randomNumbers(firstNum: -2, secondNum: 2))
+        node.eulerAngles = SCNVector3(randomNumbers(firstNum: 0, secondNum: 2*CGFloat.pi), randomNumbers(firstNum: 0, secondNum: 2*CGFloat.pi), randomNumbers(firstNum: 0, secondNum: 2*CGFloat.pi))
         self.sceneView.scene.rootNode.addChildNode(node)
         // animate node
-        let pulse = CABasicAnimation(keyPath: "scale")
-        pulse.fromValue = node.scale
-        pulse.toValue = SCNVector3((node.scale.x * 0.8), (node.scale.y * 0.8), (node.scale.z * 0.8))
-        pulse.repeatCount = 10
-        pulse.duration = 0.1
-        pulse.autoreverses = true
-        node.addAnimation(pulse, forKey: "scale")
+//        let pulse = CABasicAnimation(keyPath: "scale")
+//        pulse.fromValue = node.scale
+//        pulse.toValue = SCNVector3((node.scale.x * 0.8), (node.scale.y * 0.8), (node.scale.z * 0.8))
+//        pulse.repeatCount = 10
+//        pulse.duration = 0.1
+//        pulse.autoreverses = true
+//        node.addAnimation(pulse, forKey: "scale")
     }
 
     func setTimer() {
