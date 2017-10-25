@@ -9,6 +9,7 @@
 import UIKit
 import ARKit
 import Each
+import SpriteKit
 
 class ViewController: UIViewController {
     
@@ -16,7 +17,6 @@ class ViewController: UIViewController {
     var countdown = 10
     
     @IBOutlet weak var sceneView: ARSCNView!
-    
     
     let configuration = ARWorldTrackingConfiguration()
     override func viewDidLoad() {
@@ -26,7 +26,18 @@ class ViewController: UIViewController {
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints,ARSCNDebugOptions.showWorldOrigin]
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        //create spriteKit overlay to count points
+        let basket = SKSpriteNode(imageNamed: "art.scnassets/bag.png")
+        let overlayScene = SKScene(size: CGSize(width: 300, height: 500))
+        // set the position for base object
+        basket.position = CGPoint(x: 220, y: 70)
+        //basket.anchorPoint = CGPoint(x: 1,y: 0)
+        basket.zPosition = -1
+        // add base object to scene
+        overlayScene.addChild(basket)
+        // set scene to overlay
+        sceneView.overlaySKScene = overlayScene
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,9 +75,12 @@ class ViewController: UIViewController {
         } else {
             let results = hitTest.first!
             let node = results.node
-            node.removeFromParentNode()
-            self.sendCandy(node: node)
-            self.restoreTimer()
+            // add: if cany was touched:
+                // overlayScene.addChild(candy)
+                node.removeFromParentNode()
+                self.sendCandy(node: node)
+                self.restoreTimer()
+            
         }
     }
     
@@ -76,13 +90,13 @@ class ViewController: UIViewController {
         node.eulerAngles = SCNVector3(randomNumbers(firstNum: 0, secondNum: 2*CGFloat.pi), randomNumbers(firstNum: 0, secondNum: 2*CGFloat.pi), randomNumbers(firstNum: 0, secondNum: 2*CGFloat.pi))
         self.sceneView.scene.rootNode.addChildNode(node)
         // animate node
-//        let pulse = CABasicAnimation(keyPath: "scale")
-//        pulse.fromValue = node.scale
-//        pulse.toValue = SCNVector3((node.scale.x * 0.8), (node.scale.y * 0.8), (node.scale.z * 0.8))
-//        pulse.repeatCount = 10
-//        pulse.duration = 0.1
-//        pulse.autoreverses = true
-//        node.addAnimation(pulse, forKey: "scale")
+        let pulse = CABasicAnimation(keyPath: "scale")
+        pulse.fromValue = node.scale
+        pulse.toValue = SCNVector3((node.scale.x * 0.8), (node.scale.y * 0.8), (node.scale.z * 0.8))
+        pulse.repeatCount = 10
+        pulse.duration = 0.1
+        pulse.autoreverses = true
+        node.addAnimation(pulse, forKey: "scale")
     }
 
     func setTimer() {
