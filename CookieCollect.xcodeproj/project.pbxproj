@@ -13,6 +13,7 @@
 		0B62976F1F95B6BC009A17E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B62976E1F95B6BC009A17E8 /* Assets.xcassets */; };
 		0B6297721F95B6BC009A17E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B6297701F95B6BC009A17E8 /* LaunchScreen.storyboard */; };
 		0B62977D1F95B84E009A17E8 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B62977C1F95B84E009A17E8 /* art.scnassets */; };
+		0BAB6DAD1FA18C81006902BC /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAB6DAC1FA18C81006902BC /* GameScene.swift */; };
 		9F16CE3D63E530859FCFE225 /* Pods_CookieCollect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218735B4F8CDA62141DF4AB2 /* Pods_CookieCollect.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		0B6297711F95B6BC009A17E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0B6297731F95B6BC009A17E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B62977C1F95B84E009A17E8 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		0BAB6DAC1FA18C81006902BC /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		218735B4F8CDA62141DF4AB2 /* Pods_CookieCollect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CookieCollect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50E95C82130E28D294FA19D5 /* Pods-CookieCollect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookieCollect.release.xcconfig"; path = "Pods/Target Support Files/Pods-CookieCollect/Pods-CookieCollect.release.xcconfig"; sourceTree = "<group>"; };
 		A430AB3888D47128DEE8B04C /* Pods-CookieCollect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CookieCollect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CookieCollect/Pods-CookieCollect.debug.xcconfig"; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				0B6297671F95B6BC009A17E8 /* AppDelegate.swift */,
+				0BAB6DAC1FA18C81006902BC /* GameScene.swift */,
 				0B6297691F95B6BC009A17E8 /* ViewController.swift */,
 				0B62976B1F95B6BC009A17E8 /* Main.storyboard */,
 				0B62976E1F95B6BC009A17E8 /* Assets.xcassets */,
@@ -221,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BAB6DAD1FA18C81006902BC /* GameScene.swift in Sources */,
 				0B62976A1F95B6BC009A17E8 /* ViewController.swift in Sources */,
 				0B6297681F95B6BC009A17E8 /* AppDelegate.swift in Sources */,
 			);

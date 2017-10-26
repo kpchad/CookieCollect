@@ -17,8 +17,11 @@ class ViewController: UIViewController {
     var countdown = 10
     
     @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var skView: SKView!
     
     let configuration = ARWorldTrackingConfiguration()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sceneView.autoenablesDefaultLighting = true
@@ -27,17 +30,14 @@ class ViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
         
-        //create spriteKit overlay to count points
-        let basket = SKSpriteNode(imageNamed: "art.scnassets/bag.png")
-        let overlayScene = SKScene(size: CGSize(width: 300, height: 500))
-        // set the position for base object
-        basket.position = CGPoint(x: 220, y: 70)
-        //basket.anchorPoint = CGPoint(x: 1,y: 0)
-        basket.zPosition = -1
-        // add base object to scene
-        overlayScene.addChild(basket)
-        // set scene to overlay
-        sceneView.overlaySKScene = overlayScene
+        //spritekit scene
+        let basketScene = GameScene(size: skView.bounds.size)
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+        skView.allowsTransparency = true
+        basketScene.scaleMode = .resizeFill
+        skView.presentScene(basketScene)
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,13 +54,13 @@ class ViewController: UIViewController {
         self.setTimer()
         // add candies to scene
         let blueCandyScene = SCNScene(named: "art.scnassets/candy_blue.scn")
-        let blueCandyNode = blueCandyScene?.rootNode.childNode(withName: "candy", recursively: false)
+        let blueCandyNode = blueCandyScene?.rootNode.childNode(withName: "candyBlue", recursively: false)
         self.sendCandy(node: blueCandyNode!)
         let orangeCandyScene = SCNScene(named: "art.scnassets/candy_orange.scn")
-        let orangeCandyNode = orangeCandyScene?.rootNode.childNode(withName: "candy", recursively: false)
+        let orangeCandyNode = orangeCandyScene?.rootNode.childNode(withName: "candyOrange", recursively: false)
         self.sendCandy(node: orangeCandyNode!)
         let dotsCandyScene = SCNScene(named: "art.scnassets/candy_dots.scn")
-        let dotsCandyNode = dotsCandyScene?.rootNode.childNode(withName: "candy", recursively: false)
+        let dotsCandyNode = dotsCandyScene?.rootNode.childNode(withName: "candyDots", recursively: false)
         self.sendCandy(node: dotsCandyNode!)
     }
    
@@ -73,13 +73,39 @@ class ViewController: UIViewController {
         if hitTest.isEmpty {
             print("didn't touch anything")
         } else {
-            let results = hitTest.first!
-            let node = results.node
-            // add: if cany was touched:
-                // overlayScene.addChild(candy)
-                node.removeFromParentNode()
-                self.sendCandy(node: node)
-                self.restoreTimer()
+            print(hitTest)
+            let result = hitTest.first!
+            //print(result.node)
+            let nodeHit = result.node
+            //print(result.node.geometry!.name)
+            if let nodeName = result.node.geometry!.name {
+                if nodeName == "candyBlue"{
+                    print("blue")
+                    GameScene().candyToBasket()
+                    nodeHit.removeFromParentNode()
+                    self.sendCandy(node: nodeHit)
+                    self.restoreTimer()
+                }
+                if nodeName == "candyOragne" {
+                    print("orange")
+                    GameScene().candyToBasket()
+                    nodeHit.removeFromParentNode()
+                    self.sendCandy(node: nodeHit)
+                    self.restoreTimer()
+                }
+                if nodeName == "candyDots" {
+                    print("Dots")
+                    GameScene().candyToBasket()
+                    nodeHit.removeFromParentNode()
+                    self.sendCandy(node: nodeHit)
+                    self.restoreTimer()
+                }
+                //sceneView.overlaySKScene = overlayScene
+            }
+            else {
+                return
+            }
+            //overlayScene.addChild(candy)
             
         }
     }
