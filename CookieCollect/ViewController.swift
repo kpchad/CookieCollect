@@ -17,21 +17,24 @@ class ViewController: UIViewController {
     var countdown = 10
     
     @IBOutlet weak var sceneView: ARSCNView!
+    
     @IBOutlet weak var skView: SKView!
     
     let configuration = ARWorldTrackingConfiguration()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.run(configuration)
-        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints,ARSCNDebugOptions.showWorldOrigin]
+        //self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints,ARSCNDebugOptions.showWorldOrigin]
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
         
-        //spritekit scene
-        let basketScene = GameScene(size: skView.bounds.size)
+        let basketScene = SKScene(size: skView.bounds.size)
+        let basket = SKSpriteNode(imageNamed: "art.scnassets/bag.png")
+        basketScene.backgroundColor = SKColor.clear
+        basket.position = CGPoint(x: skView.bounds.width * 0.5, y: skView.bounds.height * 0.5)
+        basketScene.addChild(basket)
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
@@ -67,35 +70,32 @@ class ViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
-        let sceneViewTappedOn = sender.view as! SCNView
+        let sceneViewTappedOn = sender.view as! ARSCNView
         let touchCoordinates = sender.location(in: sceneViewTappedOn)
         let hitTest = sceneViewTappedOn.hitTest(touchCoordinates)
         if hitTest.isEmpty {
             print("didn't touch anything")
         } else {
-            print(hitTest)
             let result = hitTest.first!
-            //print(result.node)
             let nodeHit = result.node
-            //print(result.node.geometry!.name)
             if let nodeName = result.node.geometry!.name {
                 if nodeName == "candyBlue"{
                     print("blue")
-                    GameScene().candyToBasket()
+                    self.candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
                     self.sendCandy(node: nodeHit)
                     self.restoreTimer()
                 }
-                if nodeName == "candyOragne" {
+                if nodeName == "candyOrange" {
                     print("orange")
-                    GameScene().candyToBasket()
+                    self.candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
                     self.sendCandy(node: nodeHit)
                     self.restoreTimer()
                 }
                 if nodeName == "candyDots" {
                     print("Dots")
-                    GameScene().candyToBasket()
+                    self.candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
                     self.sendCandy(node: nodeHit)
                     self.restoreTimer()
@@ -123,6 +123,10 @@ class ViewController: UIViewController {
         pulse.duration = 0.1
         pulse.autoreverses = true
         node.addAnimation(pulse, forKey: "scale")
+    }
+    
+    func candyToBasket(nodeName: String) {
+        print("function called")
     }
 
     func setTimer() {

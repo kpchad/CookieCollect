@@ -44,9 +44,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <skView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cWh-dx-4xM">
-                                <rect key="frame" x="119" y="512" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWh-dx-4xM">
+                                <rect key="frame" x="175" y="517" width="200" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="TXw-iA-ahn"/>
+                                    <constraint firstAttribute="width" constant="200" id="Xar-NI-UsR"/>
+                                </constraints>
                             </skView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,13 +63,15 @@
                             <constraint firstItem="rbA-bn-kgb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hWV-El-gHb"/>
                             <constraint firstAttribute="trailing" secondItem="q9R-m6-vPe" secondAttribute="trailing" constant="20" id="jof-hl-vd8"/>
                             <constraint firstItem="q9R-m6-vPe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="qhf-Fy-yl3"/>
+                            <constraint firstItem="cWh-dx-4xM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xxF-LX-q28"/>
                             <constraint firstItem="rbA-bn-kgb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yEq-nu-1tr"/>
+                            <constraint firstItem="cWh-dx-4xM" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="z76-Mw-qwT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="sceneView" destination="rbA-bn-kgb" id="Kkl-up-VTE"/>
-                        <outlet property="skView" destination="cWh-dx-4xM" id="uLp-an-wKG"/>
+                        <outlet property="skView" destination="cWh-dx-4xM" id="ZvZ-4Z-NOX"/>
                         <outlet property="timerLabel" destination="q9R-m6-vPe" id="Zvf-oU-dXZ"/>
                     </connections>
                 </viewController>
