@@ -42,8 +42,8 @@ class ViewController: UIViewController {
         basketScene.backgroundColor = SKColor.clear
         basket.position = CGPoint(x: skView.bounds.width * 0.5, y: skView.bounds.height * 0.5)
         basketScene.addChild(basket)
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        //skView.showsFPS = true
+        //skView.showsNodeCount = true
         skView.allowsTransparency = true
         basketScene.scaleMode = .resizeFill
         skView.presentScene(basketScene)
@@ -63,14 +63,14 @@ class ViewController: UIViewController {
         self.setTimer()
         // add candies to scene
         let blueCandyScene = SCNScene(named: "art.scnassets/candy_blue.scn")
-        let blueCandyNode = blueCandyScene?.rootNode.childNode(withName: "candyBlue", recursively: false)
+        let blueCandyNode = blueCandyScene?.rootNode.childNode(withName: "candy_blue", recursively: false)
         self.sendCandy(node: blueCandyNode!)
         let orangeCandyScene = SCNScene(named: "art.scnassets/candy_orange.scn")
-        let orangeCandyNode = orangeCandyScene?.rootNode.childNode(withName: "candyOrange", recursively: false)
+        let orangeCandyNode = orangeCandyScene?.rootNode.childNode(withName: "candy_orange", recursively: false)
         self.sendCandy(node: orangeCandyNode!)
-        let dotsCandyScene = SCNScene(named: "art.scnassets/candy_dots.scn")
-        let dotsCandyNode = dotsCandyScene?.rootNode.childNode(withName: "candyDots", recursively: false)
-        self.sendCandy(node: dotsCandyNode!)
+        let yellowCandyScene = SCNScene(named: "art.scnassets/candy_yellow.scn")
+        let yellowCandyNode = yellowCandyScene?.rootNode.childNode(withName: "candy_yellow", recursively: false)
+        self.sendCandy(node: yellowCandyNode!)
     }
    
     @IBOutlet weak var timerLabel: UILabel!
@@ -85,21 +85,21 @@ class ViewController: UIViewController {
             let result = hitTest.first!
             let nodeHit = result.node
             if let nodeName = result.node.geometry!.name {
-                if nodeName == "candyBlue"{
+                if nodeName == "candy_blue"{
                     print(nodeName)
                     self.candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
                     self.sendCandy(node: nodeHit)
                     self.restoreTimer()
                 }
-                if nodeName == "candyOrange" {
+                if nodeName == "candy_orange" {
                     print(nodeName)
                     self.candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
                     self.sendCandy(node: nodeHit)
                     self.restoreTimer()
                 }
-                if nodeName == "candyDots" {
+                if nodeName == "candy_yellow" {
                     print(nodeName)
                     self.candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
@@ -128,6 +128,7 @@ class ViewController: UIViewController {
         node.addAnimation(pulse, forKey: "scale")
     }
     
+    // if candy is picked up, add corresponding 2d spritekit candy to basket
     func candyToBasket(nodeName: String) {
         //setup spritekit candy scene
         guard let skCandyScene = skView.scene else {return}
@@ -147,19 +148,19 @@ class ViewController: UIViewController {
         let (n,m) = candyPositions[candyCount]!
         let nextPosition = CGPoint(x: skView.bounds.width * n, y: skView.bounds.height * m)
         //add correct collored candy
-        if nodeName == "candyBlue" {
+        if nodeName == "candy_blue" {
             let candyBlue = SKSpriteNode(imageNamed: "art.scnassets/wrappedsolid_blue.png")
             candyBlue.scale(to: candySize)
             candyBlue.position = nextPosition
             skCandyScene.addChild(candyBlue)
         }
-        else if nodeName == "candyOrange" {
+        else if nodeName == "candy_orange" {
             let candyOrange = SKSpriteNode(imageNamed: "art.scnassets/wrappedsolid_orange.png")
             candyOrange.scale(to: candySize)
             candyOrange.position = nextPosition
             skCandyScene.addChild(candyOrange)
         }
-        else if nodeName == "candyDots" {
+        else if nodeName == "candy_yellow" {
             let candyYellow = SKSpriteNode(imageNamed: "art.scnassets/wrappedsolid_yellow.png")
             candyYellow.scale(to: candySize)
             candyYellow.position = nextPosition
