@@ -27,6 +27,7 @@
                                     <constraint firstAttribute="width" constant="80" id="G03-HW-LaT"/>
                                     <constraint firstAttribute="height" constant="40" id="HVS-LC-lZZ"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Start">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -35,12 +36,12 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press Start to begin collecting your candy!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9R-m6-vPe">
-                                <rect key="frame" x="20" y="40" width="335" height="30"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="0.6999064700704225" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="NAb-Zl-dwo"/>
+                                    <constraint firstAttribute="height" constant="50" id="hdo-mu-Ng2"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -54,15 +55,14 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="q9R-m6-vPe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="4GY-0D-zrd"/>
                             <constraint firstItem="qpM-9e-tBv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="JRG-1l-B4v"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="q9R-m6-vPe" secondAttribute="trailing" constant="20" id="Ofp-dA-EAb"/>
+                            <constraint firstItem="q9R-m6-vPe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="XYd-EC-mH6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="q9R-m6-vPe" secondAttribute="trailing" id="Ybs-Ve-b0H"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qpM-9e-tBv" secondAttribute="bottom" constant="20" id="afC-Rh-c6Y"/>
+                            <constraint firstItem="q9R-m6-vPe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="cV3-kU-jyy"/>
                             <constraint firstItem="rbA-bn-kgb" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="dXu-H6-t6n"/>
                             <constraint firstItem="rbA-bn-kgb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="eEh-x6-fK9"/>
                             <constraint firstItem="rbA-bn-kgb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hWV-El-gHb"/>
-                            <constraint firstAttribute="trailing" secondItem="q9R-m6-vPe" secondAttribute="trailing" constant="20" id="jof-hl-vd8"/>
-                            <constraint firstItem="q9R-m6-vPe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="qhf-Fy-yl3"/>
                             <constraint firstItem="cWh-dx-4xM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xxF-LX-q28"/>
                             <constraint firstItem="rbA-bn-kgb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yEq-nu-1tr"/>
                             <constraint firstItem="cWh-dx-4xM" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="z76-Mw-qwT"/>

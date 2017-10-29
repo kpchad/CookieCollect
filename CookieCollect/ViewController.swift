@@ -15,9 +15,15 @@ class ViewController: UIViewController {
     
     var timer = Each(1).seconds
     var countdown = 10
+    var candyCount = 0
+    var candyPositions = [1: (CGFloat(0.3), CGFloat(0.2)),
+        2: (CGFloat(0.5), CGFloat(0.2)),
+        3: (CGFloat(0.7), CGFloat(0.2)),
+        4: (CGFloat(0.4), CGFloat(0.4)),
+        5: (CGFloat(0.6), CGFloat(0.4)),
+        6: (CGFloat(0.5), CGFloat(0.6))]
     
     @IBOutlet weak var sceneView: ARSCNView!
-    
     @IBOutlet weak var skView: SKView!
     
     let configuration = ARWorldTrackingConfiguration()
@@ -30,6 +36,7 @@ class ViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
         
+        //setup spritekit basket
         let basketScene = SKScene(size: skView.bounds.size)
         let basket = SKSpriteNode(imageNamed: "art.scnassets/bag.png")
         basketScene.backgroundColor = SKColor.clear
@@ -37,7 +44,6 @@ class ViewController: UIViewController {
         basketScene.addChild(basket)
         skView.showsFPS = true
         skView.showsNodeCount = true
-        skView.ignoresSiblingOrder = true
         skView.allowsTransparency = true
         basketScene.scaleMode = .resizeFill
         skView.presentScene(basketScene)
@@ -74,39 +80,36 @@ class ViewController: UIViewController {
         let touchCoordinates = sender.location(in: sceneViewTappedOn)
         let hitTest = sceneViewTappedOn.hitTest(touchCoordinates)
         if hitTest.isEmpty {
-            print("didn't touch anything")
+            //print("didn't touch anything")
         } else {
             let result = hitTest.first!
             let nodeHit = result.node
             if let nodeName = result.node.geometry!.name {
                 if nodeName == "candyBlue"{
-                    print("blue")
+                    print(nodeName)
                     self.candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
                     self.sendCandy(node: nodeHit)
                     self.restoreTimer()
                 }
                 if nodeName == "candyOrange" {
-                    print("orange")
+                    print(nodeName)
                     self.candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
                     self.sendCandy(node: nodeHit)
                     self.restoreTimer()
                 }
                 if nodeName == "candyDots" {
-                    print("Dots")
+                    print(nodeName)
                     self.candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
                     self.sendCandy(node: nodeHit)
                     self.restoreTimer()
                 }
-                //sceneView.overlaySKScene = overlayScene
             }
             else {
                 return
             }
-            //overlayScene.addChild(candy)
-            
         }
     }
     
@@ -126,7 +129,43 @@ class ViewController: UIViewController {
     }
     
     func candyToBasket(nodeName: String) {
-        print("function called")
+        //setup spritekit candy scene
+        guard let skCandyScene = skView.scene else {return}
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+        skView.allowsTransparency = true
+        skCandyScene.scaleMode = .resizeFill
+        let candySize = CGSize(width: 40, height: 40)
+        // iterate to get the position of the next piece of candy in the basket
+        candyCount += 1
+        print("candyCount = ", candyCount)
+        if candyCount >= 7 {
+            self.timerLabel.text = "full bag, you win!"
+            return
+        }
+        let (n,m) = candyPositions[candyCount]!
+        let nextPosition = CGPoint(x: skView.bounds.width * n, y: skView.bounds.height * m)
+        //add correct collored candy
+        if nodeName == "candyBlue" {
+            let candyBlue = SKSpriteNode(imageNamed: "art.scnassets/wrappedsolid_blue.png")
+            candyBlue.scale(to: candySize)
+            candyBlue.position = nextPosition
+            skCandyScene.addChild(candyBlue)
+        }
+        else if nodeName == "candyOrange" {
+            let candyOrange = SKSpriteNode(imageNamed: "art.scnassets/wrappedsolid_orange.png")
+            candyOrange.scale(to: candySize)
+            candyOrange.position = nextPosition
+            skCandyScene.addChild(candyOrange)
+        }
+        else if nodeName == "candyDots" {
+            let candyYellow = SKSpriteNode(imageNamed: "art.scnassets/wrappedsolid_yellow.png")
+            candyYellow.scale(to: candySize)
+            candyYellow.position = nextPosition
+            skCandyScene.addChild(candyYellow)
+        }
+        skView.presentScene(skCandyScene)
     }
 
     func setTimer() {
@@ -134,7 +173,7 @@ class ViewController: UIViewController {
             self.countdown -= 1
             self.timerLabel.text = String(self.countdown)
             if self.countdown == 0 {
-                self.timerLabel.text = "you lose"
+                self.timerLabel.text = "time is up, you lose"
                 return .stop
             }
             return .continue
@@ -149,5 +188,6 @@ class ViewController: UIViewController {
     func randomNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat {
         return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
     }
+    
 }
 
