@@ -86,25 +86,22 @@ class ViewController: UIViewController {
             let nodeHit = result.node
             if let nodeName = result.node.geometry!.name {
                 if nodeName == "candy_blue"{
-                    print(nodeName)
-                    self.candyToBasket(nodeName: nodeName)
+                    self.restoreTimer()
+                    candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
                     self.sendCandy(node: nodeHit)
-                    self.restoreTimer()
                 }
                 if nodeName == "candy_orange" {
-                    print(nodeName)
-                    self.candyToBasket(nodeName: nodeName)
+                    self.restoreTimer()
+                    candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
                     self.sendCandy(node: nodeHit)
-                    self.restoreTimer()
                 }
                 if nodeName == "candy_yellow" {
-                    print(nodeName)
-                    self.candyToBasket(nodeName: nodeName)
+                    self.restoreTimer()
+                    candyToBasket(nodeName: nodeName)
                     nodeHit.removeFromParentNode()
                     self.sendCandy(node: nodeHit)
-                    self.restoreTimer()
                 }
             }
             else {
@@ -132,17 +129,16 @@ class ViewController: UIViewController {
     func candyToBasket(nodeName: String) {
         //setup spritekit candy scene
         guard let skCandyScene = skView.scene else {return}
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        skView.ignoresSiblingOrder = true
+        //skView.ignoresSiblingOrder = true
         skView.allowsTransparency = true
         skCandyScene.scaleMode = .resizeFill
         let candySize = CGSize(width: 40, height: 40)
         // iterate to get the position of the next piece of candy in the basket
         candyCount += 1
         print("candyCount = ", candyCount)
-        if candyCount >= 7 {
-            self.timerLabel.text = "full bag, you win!"
+        if candyCount > 6 {
+            timer.stop()
+            timerLabel.text = "bag full, you win!"
             return
         }
         let (n,m) = candyPositions[candyCount]!
