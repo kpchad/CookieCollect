@@ -112,7 +112,7 @@ class ViewController: UIViewController {
     
     func sendCandy(node: SCNNode) {
         // start candy at random position
-        node.position = SCNVector3(randomNumbers(firstNum: -2, secondNum: 2),randomNumbers(firstNum: -1, secondNum: -2),randomNumbers(firstNum: -2, secondNum: 2))
+        node.position = SCNVector3(randomNumbers(firstNum: -2, secondNum: 2),randomNumbers(firstNum: -1.4, secondNum: -1.8),randomNumbers(firstNum: -2, secondNum: 2))
         node.eulerAngles = SCNVector3(randomNumbers(firstNum: 0, secondNum: 2*CGFloat.pi), randomNumbers(firstNum: 0, secondNum: 2*CGFloat.pi), randomNumbers(firstNum: 0, secondNum: 2*CGFloat.pi))
         self.sceneView.scene.rootNode.addChildNode(node)
         // animate node
